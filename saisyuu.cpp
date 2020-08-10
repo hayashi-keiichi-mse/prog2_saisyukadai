@@ -8,20 +8,20 @@
 using namespace std;
 
 struct Grid {
-  //boolå‹ã§è‰²ã‚’æ±ºå®š,trueãªã‚‰æœ‰è‰²,falseãªã‚‰ç„¡è‰²
-  bool colorNow = false; //ç¾åœ¨ã®ãƒã‚¹ç›®ã®è‰²
-  bool collectColor = false; //ç­”ãˆã®è‰²
+  //boolŒ^‚ÅF‚ğŒˆ’è,true‚È‚ç—LF,false‚È‚ç–³F
+  bool colorNow = false; //Œ»İ‚Ìƒ}ƒX–Ú‚ÌF
+  bool collectColor = false; //“š‚¦‚ÌF
 };
 
 
-/*å•é¡Œã‚’ç”Ÿæˆè©¦ä½œ Gridå‹*/
+/*–â‘è‚ğ¶¬ì GridŒ^*/
 vector<vector<Grid>> makeAns(int hight, int width) {
   vector<vector<Grid>> ans(hight, vector<Grid>(width));
   int random;
-  /*ä¹±æ•°ã§å„ãƒã‚¹ç›®ã®è‰²(ç­”ãˆ)ã‚’æ±ºå®š*/
+  /*—”‚ÅŠeƒ}ƒX–Ú‚ÌF(“š‚¦)‚ğŒˆ’è*/
   for (int y = 0; y < hight; y++) {
     static clock_t timPre, timCur = clock();
-    srand((unsigned int)timCur); /*æ™‚é–“ã§åˆæœŸåŒ–*/
+    srand((unsigned int)timCur); /*ŠÔ‚Å‰Šú‰»*/
     for (auto y = ans.begin(); y != ans.end(); y++) {
       for (auto x = (*y).begin(); x != (*y).end(); x++) {
         random = rand() % 2;
@@ -32,7 +32,7 @@ vector<vector<Grid>> makeAns(int hight, int width) {
         }
       }
     }
-    /*åŒã˜ãƒ‘ã‚¿ãƒ¼ãƒ³ã«ãªã‚‰ãªã„ã‚ˆã†ã«é…æ…®_å‡¦ç†é–“éš”ã‚’é–‹ã‘ã‚‹*/
+    /*“¯‚¶ƒpƒ^[ƒ“‚É‚È‚ç‚È‚¢‚æ‚¤‚É”z—¶_ˆ—ŠÔŠu‚ğŠJ‚¯‚é*/
     timPre = timCur;
     while ((unsigned int)timPre == (unsigned int)timCur) {
       timCur = clock();
@@ -42,7 +42,7 @@ vector<vector<Grid>> makeAns(int hight, int width) {
 }
 
 
-/*è¡Œãƒ’ãƒ³ãƒˆæƒ…å ±ã®å–å¾—*/
+/*sƒqƒ“ƒgî•ñ‚Ìæ“¾*/
 vector<vector<int>> getHintLine(vector<vector<Grid>> ans, int hight, int width){
   vector<vector<int>> hintLine(hight, vector<int>());
   for (int i = 0; i < hight; i++) {
@@ -68,7 +68,7 @@ vector<vector<int>> getHintLine(vector<vector<Grid>> ans, int hight, int width){
 }
 
 
-/*åˆ—ãƒ’ãƒ³ãƒˆåˆ—æƒ…å ±ã®å–å¾—*/
+/*—ñƒqƒ“ƒg—ñî•ñ‚Ìæ“¾*/
 vector<vector<int>> getHintRaw(vector<vector<Grid>> ans, int hight, int width){
   vector<vector<int>> hintRaw(width, vector<int>());
   for (int x = 0; x < width; x++) {
@@ -95,7 +95,7 @@ vector<vector<int>> getHintRaw(vector<vector<Grid>> ans, int hight, int width){
 
 
 
-/*AAåŒã˜è§£ãŒã‚ã‚‹ã‹ç¢ºèªvecãƒ€ãƒŸãƒ¼v2ç­”ãˆ*/
+/*AA“¯‚¶‰ğ‚ª‚ ‚é‚©Šm”Fvecƒ_ƒ~[v2“š‚¦*/
 bool isSameAns(vector<vector<Grid>> vec, vector<vector<int>>hintLOrg, vector<vector<int>>hintROrg) {
   int hight, width;
   hight = end(vec) - begin(vec);
@@ -135,7 +135,7 @@ void combination(const vector<int>& color, vector<int>& result, vector<int>& box
 
 
 
-/*å…¨è¦ç´ ãŒ0ã‹ã‚‰æˆã‚‹2æ¬¡å…ƒvectorã®ç”Ÿæˆ*/
+/*‘S—v‘f‚ª0‚©‚ç¬‚é2ŸŒ³vector‚Ì¶¬*/
 vector<vector<Grid>> resetV(int hight, int width) {
   vector<vector<Grid>> v(hight, vector<Grid>(width));
   for (auto i = v.begin(); i != v.end(); i++) {
@@ -151,7 +151,7 @@ vector<vector<Grid>> resetV(int hight, int width) {
 
 
 
-/*å•é¡Œã®ä¸€æ„åˆ¶*/
+/*–â‘è‚ÌˆêˆÓ§*/
 bool checkAnoSol(int hight, int width, vector<vector<int>>hintLOrg, vector<vector<int>>hintROrg) {
   vector<vector<Grid>> anoSol;
   vector<int> choice, result, comb;
@@ -171,7 +171,7 @@ bool checkAnoSol(int hight, int width, vector<vector<int>>hintLOrg, vector<vecto
   }
   for (int i = 0; i < combElements / numcolor; i++) {
     anoSol = resetV(hight, width);
-    for (int j = 0; j < numcolor; j++) { //numcolorã¯æœ‰è‰²ãƒã‚¹ã®å€‹æ•°
+    for (int j = 0; j < numcolor; j++) { //numcolor‚Í—LFƒ}ƒX‚ÌŒÂ”
       anoSol.at(comb[i * numcolor + j] / width).at(comb[i * numcolor + j] % width).collectColor = true;
     }
     if (isSameAns(anoSol, hintLOrg, hintROrg)) solutions++;
@@ -184,14 +184,14 @@ bool checkAnoSol(int hight, int width, vector<vector<int>>hintLOrg, vector<vecto
 
 
 
-/*1è¡Œåˆ†ã®ãƒ’ãƒ³ãƒˆæƒ…å ±è¡¨ç¤º*/
+/*1s•ª‚Ìƒqƒ“ƒgî•ñ•\¦*/
 void printHintL(int y, vector<vector<int>> hintLine) {
   int sizeVecL;
   cout << (" ");
   if (!hintLine.at(y).empty()) {
     sizeVecL = end(hintLine.at(y)) - begin(hintLine.at(y));
     for (int i = 0; i < sizeVecL; i++) {
-      char num[3] = ("ï¼");
+      char num[3] = ("‚O");
       num[1] = num[1] + hintLine.at(y).at(i);
       cout << num;
     }
@@ -199,7 +199,7 @@ void printHintL(int y, vector<vector<int>> hintLine) {
 }
 
 
-/*å…¨éƒ¨åˆ—åˆ†ã®ãƒ’ãƒ³ãƒˆã‚’è¡¨ç¤º*/
+/*‘S•”—ñ•ª‚Ìƒqƒ“ƒg‚ğ•\¦*/
 void printHintR(vector<vector<int>> vec) {
   int sizeVecL, maxSizeVecL = 0, sizeVecR;
   sizeVecR = end(vec) - begin(vec);
@@ -211,15 +211,15 @@ void printHintR(vector<vector<int>> vec) {
   }
 
   for (int i = 0; i < maxSizeVecL; i++) {
-    cout << ("ã€€");
+    cout << ("@");
     for (int j = 0; j < sizeVecR; j++) {
       sizeVecL = end(vec.at(j)) - begin(vec.at(j));
       if (i < sizeVecL) {
-        char num[3] = ("ï¼");
+        char num[3] = ("‚O");
         num[1] = num[1] + vec.at(j).at(i);
         cout << num;
       } else {
-        cout << ("ã€€");
+        cout << ("@");
       }
     }
     cout << endl;
@@ -227,7 +227,7 @@ void printHintR(vector<vector<int>> vec) {
 }
 
 
-/*v2ã«æ¨¡ç¯„è§£ç­”ã‚’ä»£å…¥*/
+/*v2‚É–Í”Í‰ğ“š‚ğ‘ã“ü*/
 bool checkYourAns(vector<vector<Grid>> v1, vector<vector<Grid>> v2) {
   int i = 0, j = 0;
   for (auto y = v1.begin(); y != v1.end(); y++) {
@@ -245,28 +245,28 @@ bool checkYourAns(vector<vector<Grid>> v1, vector<vector<Grid>> v2) {
   return true;
 }
 
-/*ãƒãƒ¼ã‚«ãƒ¼ã®é¸æŠ*/
+/*ƒ}[ƒJ[‚Ì‘I‘ğ*/
 void selectPatern(int y, int posY, int x, int posX, bool yourColor) {
   if ((x == posX) && (y == posY)) {
     if (yourColor) {
-      cout << "â˜…";
+      cout << "š";
     } else {
-      cout << "â˜†";
+      cout << "™";
     }
   }else {
     if (yourColor) {
-      cout << "â– ";
+      cout << "¡";
     } else {
-      cout << "â–¡";
+      cout << " ";
     }
   }
 }
 
-/*æç”»å‡¦ç†*/
+/*•`‰æˆ—*/
 void drawPic(vector<vector<Grid>>& vec, int posY, int posX, vector<vector<int>> hintLine, vector<vector<int>> hintRaw) {
   cout << endl;
   for (size_t y = 0; y < vec.size(); y++) {
-    cout << ("ã€€");
+    cout << ("@");
     for (size_t x = 0; x < vec.at(y).size(); x++) {
       selectPatern(y, posY, x, posX, vec.at(y).at(x).colorNow);
     }
@@ -313,7 +313,7 @@ int main() {
   vector<vector<int>> hintLine;
   vector<vector<int>> hintRaw;
 
-  cout << ("å•é¡Œä½œæˆä¸­");
+  cout << ("–â‘èì¬’†");
   do {
     collectAns.clear();
     hintLine.clear();
@@ -333,7 +333,7 @@ int main() {
     system("cls");
   }
   drawPic(yourAns, -1, -1, hintLine, hintRaw);
-  cout << "æ­£è§£!ã‚¯ãƒªã‚¢!" << endl;
+  cout << "³‰ğ!ƒNƒŠƒA!" << endl;
 
 
 }
