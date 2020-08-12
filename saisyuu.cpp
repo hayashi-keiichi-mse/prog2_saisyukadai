@@ -7,46 +7,46 @@
 #include <math.h>
 using namespace std;
 
-/*ƒ}ƒX–Ú‚Ì\‘¢‘Ì‚ğ’è‹`*/
+/*ãƒã‚¹ç›®ã®æ§‹é€ ä½“ã‚’å®šç¾©*/
 struct Grid {
-  //boolŒ^‚ÅF‚ğŒˆ’è,true‚È‚ç—LF,false‚È‚ç–³F
-  bool yourColor = false; //Œ»İ‚Ìƒ}ƒX–Ú‚ÌF
-  bool collectColor = false; //“š‚¦‚ÌF
-  void changeYourColor(); //ƒ}ƒX–Ú‚ÌF‚ğ•ÏX
-  bool checkYourAns(); // ‚»‚Ìƒ}ƒX–Ú‚É‚Â‚¢‚Ä³‰ğ‚©Šm”F
+  //boolå‹ã§è‰²ã‚’æ±ºå®š,trueãªã‚‰æœ‰è‰²,falseãªã‚‰ç„¡è‰²
+  bool yourColor = false; //ç¾åœ¨ã®ãƒã‚¹ç›®ã®è‰²
+  bool collectColor = false; //ç­”ãˆã®è‰²
+  void changeYourColor(); //ãƒã‚¹ç›®ã®è‰²ã‚’å¤‰æ›´
+  bool checkYourAns(); // ãã®ãƒã‚¹ç›®ã«ã¤ã„ã¦æ­£è§£ã‹ç¢ºèª
 };
 
 void Grid::changeYourColor() {
-  yourColor = !yourColor; //‚»‚Ìƒ}ƒX–Ú‚ÌF‚ğ•ÏX
+  yourColor = !yourColor; //ãã®ãƒã‚¹ç›®ã®è‰²ã‚’å¤‰æ›´
 }
 
 bool Grid::checkYourAns() {
-  /*ƒvƒŒƒCƒ„‚ÌF‚Æ“š‚¦‚ª‡‚Á‚Ä‚¢‚é‚©Šm”F*/
+  /*ãƒ—ãƒ¬ã‚¤ãƒ¤ã®è‰²ã¨ç­”ãˆãŒåˆã£ã¦ã„ã‚‹ã‹ç¢ºèª*/
   if (yourColor == collectColor) return true;
   return false;
 }
 
 
-/*–â‘è‚ğ¶¬*/
+/*å•é¡Œã‚’ç”Ÿæˆ*/
 vector<vector<Grid>> makeAns(int hight, int width) {
-  vector<vector<Grid>> ans(hight, vector<Grid>(width)); //GridŒ^‚Ìvector‚ğ’è‹`
-  int random; //—”‚ğ¶¬
+  vector<vector<Grid>> ans(hight, vector<Grid>(width)); //Gridå‹ã®vectorã‚’å®šç¾©
+  int random; //ä¹±æ•°ã‚’ç”Ÿæˆ
 
-  /*—”‚ÅŠeƒ}ƒX–Ú‚ÌF(“š‚¦)‚ğŒˆ’è*/
+  /*ä¹±æ•°ã§å„ãƒã‚¹ç›®ã®è‰²(ç­”ãˆ)ã‚’æ±ºå®š*/
   for (int y = 0; y < hight; y++) {
     static clock_t timPre, timCur = clock();
-    srand((unsigned int)timCur); /*ŠÔ‚Å‰Šú‰»*/
+    srand((unsigned int)timCur); /*æ™‚é–“ã§åˆæœŸåŒ–*/
     for (auto y = ans.begin(); y != ans.end(); y++) {
       for (auto x = (*y).begin(); x != (*y).end(); x++) {
-        random = rand() % 2; //0‚Ü‚½‚Í1‚Ì—”‚ğ¶¬
+        random = rand() % 2; //0ã¾ãŸã¯1ã®ä¹±æ•°ã‚’ç”Ÿæˆ
         if (random == 1) {
-          (*x).collectColor = true; //0‚È‚ç–³F‚Éİ’è
+          (*x).collectColor = true; //0ãªã‚‰ç„¡è‰²ã«è¨­å®š
         }else {
-          (*x).collectColor = false; //1‚È‚ç—LF(•)‚Éİ’è
+          (*x).collectColor = false; //1ãªã‚‰æœ‰è‰²(é»’)ã«è¨­å®š
         }
       }
     }
-    /*“¯‚¶ƒpƒ^[ƒ“‚Ì—”‚ğ¶¬‚ğ–h‚®_ˆ—ŠÔŠu‚ğŠJ‚¯‚é*/
+    /*åŒã˜ãƒ‘ã‚¿ãƒ¼ãƒ³ã®ä¹±æ•°ã‚’ç”Ÿæˆã‚’é˜²ã_å‡¦ç†é–“éš”ã‚’é–‹ã‘ã‚‹*/
     timPre = timCur;
     while ((unsigned int)timPre == (unsigned int)timCur) {
       timCur = clock();
@@ -56,9 +56,9 @@ vector<vector<Grid>> makeAns(int hight, int width) {
 }
 
 
-/*sƒqƒ“ƒgî•ñ‚Ìæ“¾*/
+/*è¡Œãƒ’ãƒ³ãƒˆæƒ…å ±ã®å–å¾—*/
 vector<vector<int>> getHintLine(vector<vector<Grid>> ans, int hight, int width){
-  vector<vector<int>> hintLine(hight, vector<int>()); //s‚Ìƒqƒ“ƒg‚ğŠi”[‚·‚é‚½‚ß‚Ìvector‚ğ¶¬
+  vector<vector<int>> hintLine(hight, vector<int>()); //è¡Œã®ãƒ’ãƒ³ãƒˆã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®vectorã‚’ç”Ÿæˆ
   for (int i = 0; i < hight; i++) {
     static int count = 0;
     for (int j = 0; j < width; j++) {
@@ -66,7 +66,7 @@ vector<vector<int>> getHintLine(vector<vector<Grid>> ans, int hight, int width){
         count++;
       }
       if (!ans.at(i).at(j).collectColor && count != 0) {
-        hintLine[i].push_back(count); //•‚¢ƒ}ƒX–Ú‚ª˜A‘±‚·‚é‰ñ”‚ğ‘ã“ü
+        hintLine[i].push_back(count); //é»’ã„ãƒã‚¹ç›®ãŒé€£ç¶šã™ã‚‹å›æ•°ã‚’ä»£å…¥
         count = 0;
       }
     }
@@ -74,7 +74,7 @@ vector<vector<int>> getHintLine(vector<vector<Grid>> ans, int hight, int width){
       hintLine[i].push_back(count);
     }
     if (hintLine.at(i).empty()) {
-      hintLine[i].push_back(0); //‚»‚Ì—ñ‚É•‚¢ƒ}ƒX–Ú‚ª1‚Â‚à‚È‚¢ê‡‚Í0‚ğ‘ã“ü
+      hintLine[i].push_back(0); //ãã®åˆ—ã«é»’ã„ãƒã‚¹ç›®ãŒ1ã¤ã‚‚ãªã„å ´åˆã¯0ã‚’ä»£å…¥
     }
     count = 0;
   }
@@ -82,7 +82,7 @@ vector<vector<int>> getHintLine(vector<vector<Grid>> ans, int hight, int width){
 }
 
 
-/*—ñƒqƒ“ƒg—ñî•ñ‚Ìæ“¾*/
+/*åˆ—ãƒ’ãƒ³ãƒˆåˆ—æƒ…å ±ã®å–å¾—*/
 vector<vector<int>> getHintRaw(vector<vector<Grid>> ans, int hight, int width){
   vector<vector<int>> hintRaw(width, vector<int>());
   for (int x = 0; x < width; x++) {
@@ -92,14 +92,14 @@ vector<vector<int>> getHintRaw(vector<vector<Grid>> ans, int hight, int width){
         count++;
       }
       if (!ans.at(y).at(x).collectColor && count != 0) {
-        hintRaw[x].push_back(count); //•‚¢ƒ}ƒX–Ú‚Ì˜A‘±‰ñ”‚ğ‘ã“ü
+        hintRaw[x].push_back(count); //é»’ã„ãƒã‚¹ç›®ã®é€£ç¶šå›æ•°ã‚’ä»£å…¥
         count = 0;
       }
     }
     if (count != 0) {
       hintRaw[x].push_back(count);
     }
-    if (hintRaw.at(x).empty()) { //‚»‚Ì—ñ‚É•‚¢ƒ}ƒX–Ú‚ª1‚Â‚à‚È‚¢ê‡‚Í0‚ğ‘ã“ü
+    if (hintRaw.at(x).empty()) { //ãã®åˆ—ã«é»’ã„ãƒã‚¹ç›®ãŒ1ã¤ã‚‚ãªã„å ´åˆã¯0ã‚’ä»£å…¥
       hintRaw[x].push_back(0);
     }
     count = 0;
@@ -109,14 +109,14 @@ vector<vector<int>> getHintRaw(vector<vector<Grid>> ans, int hight, int width){
 
 
 
-/*–â‘è‚Æ•Ê–â‘è‚Ì‰ğ‚ª“¯‚¶‚É‚È‚é‚©Šm”F*/
+/*å•é¡Œã¨åˆ¥å•é¡Œã®è§£ãŒåŒã˜ã«ãªã‚‹ã‹ç¢ºèª*/
 bool isSameAns(vector<vector<Grid>> anoSol, vector<vector<int>>hintLOrg, vector<vector<int>>hintROrg) {
   int hight, width;
   hight = end(anoSol) - begin(anoSol);
   width = end(anoSol.at(0)) - begin(anoSol.at(0));
   vector<vector<int>> hintL, hintR;
-  hintL = getHintLine(anoSol, hight, width); //•Ê‰ğŒó•â‚Ìsƒqƒ“ƒgî•ñ‚ğ’²¸
-  hintR = getHintRaw(anoSol, hight, width); //•Ê‰ğ‚Ì—ñƒqƒ“ƒgî•ñ‚ğ’²¸
+  hintL = getHintLine(anoSol, hight, width); //åˆ¥è§£å€™è£œã®è¡Œãƒ’ãƒ³ãƒˆæƒ…å ±ã‚’èª¿æŸ»
+  hintR = getHintRaw(anoSol, hight, width); //åˆ¥è§£ã®åˆ—ãƒ’ãƒ³ãƒˆæƒ…å ±ã‚’èª¿æŸ»
   if (hintL == hintLOrg && hintR == hintROrg) {
     return true;
   }
@@ -124,11 +124,11 @@ bool isSameAns(vector<vector<Grid>> anoSol, vector<vector<int>>hintLOrg, vector<
 }
 
 
-/*‘g‚İ‡‚í‚¹ŒvZ*/
+/*çµ„ã¿åˆã‚ã›è¨ˆç®—*/
 void combination(const vector<int>& color, vector<int>& result, vector<int>& box, unsigned n) {
-  if (result.size() == n) { //w’è‘I‘ğ”‚Ü‚Å’Tõ‚µ‚½‚©”»’f
+  if (result.size() == n) { //æŒ‡å®šé¸æŠæ•°ã¾ã§æ¢ç´¢ã—ãŸã‹åˆ¤æ–­
     for (auto& i : result) {
-      box.push_back(i); //‘g‚İ‡‚í‚¹î•ñ‚ğ‹L˜^
+      box.push_back(i); //çµ„ã¿åˆã‚ã›æƒ…å ±ã‚’è¨˜éŒ²
     }
   }
   else {
@@ -150,7 +150,7 @@ void combination(const vector<int>& color, vector<int>& result, vector<int>& box
 
 
 
-/*‘S—v‘f‚ªfalse‚©‚ç¬‚é2ŸŒ³vector‚Ì¶¬*/
+/*å…¨è¦ç´ ãŒfalseã‹ã‚‰æˆã‚‹2æ¬¡å…ƒvectorã®ç”Ÿæˆ*/
 vector<vector<Grid>> resetV(int hight, int width) {
   vector<vector<Grid>> v(hight, vector<Grid>(width));
   for (auto i = v.begin(); i != v.end(); i++) {
@@ -166,79 +166,79 @@ vector<vector<Grid>> resetV(int hight, int width) {
 
 
 
-/*ì¬‚µ‚½–â‘è‚ÌˆêˆÓ«‚ğŠm”F*/
+/*ä½œæˆã—ãŸå•é¡Œã®ä¸€æ„æ€§ã‚’ç¢ºèª*/
 bool checkAnoSol(int hight, int width, vector<vector<int>>hintLOrg, vector<vector<int>>hintROrg) {
-  vector<vector<Grid>> anoSol; //•Ê‰ğ’Tõ—p
-  vector<int> choice, result, comb; //ƒ}ƒX–Ú‚Ì”•ª‚Ì”’lŠi”[—p,‘g‚İ‡‚í‚¹‚Ìˆê•Û—p,‘g‚İ‡‚í‚¹‘S‹L˜^—p
-  int solutions = 0, numcolor = 0, combElements = 0, numElements; //‰ğ‚ÌŒÂ”,•‚¢ƒ}ƒX–Ú‚Ì‡Œv,‘g‚İ‡‚í‚¹Ši”[—p,ƒ}ƒX–Ú‚Ì‡Œv”
-  numElements = hight * width; //ƒ}ƒX–Ú‚Ì‡Œv”‚ğŒvZ
-  /*–Í”Í‰ğ“š‚Ì•‚¢ƒ}ƒX–Ú‚Ì‡Œv”‚ğ’²¸*/
+  vector<vector<Grid>> anoSol; //åˆ¥è§£æ¢ç´¢ç”¨
+  vector<int> choice, result, comb; //ãƒã‚¹ç›®ã®æ•°åˆ†ã®æ•°å€¤æ ¼ç´ç”¨,çµ„ã¿åˆã‚ã›ã®ä¸€æ™‚ä¿æŒç”¨,çµ„ã¿åˆã‚ã›å…¨è¨˜éŒ²ç”¨
+  int solutions = 0, numcolor = 0, combElements = 0, numElements; //è§£ã®å€‹æ•°,é»’ã„ãƒã‚¹ç›®ã®åˆè¨ˆ,çµ„ã¿åˆã‚ã›æ ¼ç´ç”¨,ãƒã‚¹ç›®ã®åˆè¨ˆæ•°
+  numElements = hight * width; //ãƒã‚¹ç›®ã®åˆè¨ˆæ•°ã‚’è¨ˆç®—
+  /*æ¨¡ç¯„è§£ç­”ã®é»’ã„ãƒã‚¹ç›®ã®åˆè¨ˆæ•°ã‚’èª¿æŸ»*/
   for (auto i = hintLOrg.begin(); i != hintLOrg.end(); i++) {
     for (auto j = (*i).begin(); j != (*i).end(); j++) {
         numcolor += *j;
     }
   }
-  /*ƒ}ƒX–Ú‚Ì‡Œv”‚Æ“¯‚¶‚¾‚¯‚Ìvector‚ğ¶¬*/
+  /*ãƒã‚¹ç›®ã®åˆè¨ˆæ•°ã¨åŒã˜ã ã‘ã®vectorã‚’ç”Ÿæˆ*/
   for (int i = 0; i < numElements; i++) {
     choice.push_back(i);
   }
-  combination(choice, result, comb, numcolor); //F‚ğ“h‚éƒ}ƒX–Ú‚Ì‘g‡‚¹‚ğ’²¸
+  combination(choice, result, comb, numcolor); //è‰²ã‚’å¡—ã‚‹ãƒã‚¹ç›®ã®çµ„åˆã›ã‚’èª¿æŸ»
   for (auto i = comb.begin(); i != comb.end(); i++) {
     combElements++;
   }
-  /*•Ê‰ğ’Tõ*/
+  /*åˆ¥è§£æ¢ç´¢*/
   for (int i = 0; i < combElements / numcolor; i++) {
     anoSol = resetV(hight, width);
-    for (int j = 0; j < numcolor; j++) { //numcolor‚Í—LFƒ}ƒX‚ÌŒÂ”
-      anoSol.at(comb[i * numcolor + j] / width).at(comb[i * numcolor + j] % width).collectColor = true; //w’è‚µ‚½s,—ñ‚ÌF‚ğ•‚Ö
+    for (int j = 0; j < numcolor; j++) { //numcolorã¯æœ‰è‰²ãƒã‚¹ã®å€‹æ•°
+      anoSol.at(comb[i * numcolor + j] / width).at(comb[i * numcolor + j] % width).collectColor = true; //æŒ‡å®šã—ãŸè¡Œ,åˆ—ã®è‰²ã‚’é»’ã¸
     }
-    if (isSameAns(anoSol, hintLOrg, hintROrg)) solutions++; //‰ğ‚ª“¯‚¶‚É‚È‚é‚©Šm”F
-    if(1 < solutions) return false; //•¡”‰ğ‚ªo‚½‚çƒAƒEƒg
+    if (isSameAns(anoSol, hintLOrg, hintROrg)) solutions++; //è§£ãŒåŒã˜ã«ãªã‚‹ã‹ç¢ºèª
+    if(1 < solutions) return false; //è¤‡æ•°è§£ãŒå‡ºãŸã‚‰ã‚¢ã‚¦ãƒˆ
   }
-  if (solutions == 1) return true; //‰ğ‚ª1‚Â‚È‚çOK
+  if (solutions == 1) return true; //è§£ãŒ1ã¤ãªã‚‰OK
   else return false;
 }
 
 
 
 
-/*1s•ª‚Ìƒqƒ“ƒgî•ñ•\¦*/
+/*1è¡Œåˆ†ã®ãƒ’ãƒ³ãƒˆæƒ…å ±è¡¨ç¤º*/
 void printHintL(int y, vector<vector<int>> hintLine) {
   int sizeVecL;
   cout << (" ");
   if (!hintLine.at(y).empty()) {
     sizeVecL = end(hintLine.at(y)) - begin(hintLine.at(y));
     for (int i = 0; i < sizeVecL; i++) {
-      char num[3] = ("‚O"); //‘SŠp•¶š•\¦—p
-      num[1] = num[1] + hintLine.at(y).at(i); //‘SŠp‚É•ÏŠ·
+      char num[3] = ("ï¼"); //å…¨è§’æ–‡å­—è¡¨ç¤ºç”¨
+      num[1] = num[1] + hintLine.at(y).at(i); //å…¨è§’ã«å¤‰æ›
       cout << num;
     }
   }
 }
 
 
-/*‘S•”—ñ•ª‚Ìƒqƒ“ƒg‚ğ•\¦*/
+/*å…¨éƒ¨åˆ—åˆ†ã®ãƒ’ãƒ³ãƒˆã‚’è¡¨ç¤º*/
 void printHintR(vector<vector<int>> hintRaw) {
-  int sizeVecL, maxSizeVecL = 0, sizeVecR; //—ñƒqƒ“ƒgvec‚Ìs”,Å‘ås”,—ñ”
+  int sizeVecL, maxSizeVecL = 0, sizeVecR; //åˆ—ãƒ’ãƒ³ãƒˆvecã®è¡Œæ•°,æœ€å¤§è¡Œæ•°,åˆ—æ•°
   sizeVecR = end(hintRaw) - begin(hintRaw);
-  /*—ñƒqƒ“ƒgvecctor‚ÌÅ‘ås”‚ğ’²¸*/
+  /*åˆ—ãƒ’ãƒ³ãƒˆvecctorã®æœ€å¤§è¡Œæ•°ã‚’èª¿æŸ»*/
   for (int i = 0; i < sizeVecR; i++) {
     sizeVecL = end(hintRaw.at(i)) - begin(hintRaw.at(i));
     if (maxSizeVecL < sizeVecL) {
       maxSizeVecL = sizeVecL;
     }
   }
-  /*—ñƒqƒ“ƒg‚ğ‘S‚Ä•\¦*/
+  /*åˆ—ãƒ’ãƒ³ãƒˆã‚’å…¨ã¦è¡¨ç¤º*/
   for (int i = 0; i < maxSizeVecL; i++) {
-    cout << ("@");
+    cout << ("ã€€");
     for (int j = 0; j < sizeVecR; j++) {
       sizeVecL = end(hintRaw.at(j)) - begin(hintRaw.at(j));
       if (i < sizeVecL) {
-        char num[3] = ("‚O"); //‘SŠp•ÏŠ·—p
-        num[1] = num[1] + hintRaw.at(j).at(i); //‘SŠp•¶š‚Æ‚µ‚Äo—Í
+        char num[3] = ("ï¼"); //å…¨è§’å¤‰æ›ç”¨
+        num[1] = num[1] + hintRaw.at(j).at(i); //å…¨è§’æ–‡å­—ã¨ã—ã¦å‡ºåŠ›
         cout << num;
       } else {
-        cout << ("@");
+        cout << ("ã€€");
       }
     }
     cout << endl;
@@ -246,7 +246,7 @@ void printHintR(vector<vector<int>> hintRaw) {
 }
 
 
-/*ƒvƒŒƒCƒ„[‚Ì‰ğ“š‚Æ–Í”Í‰ğ“š‚ªˆê’v‚·‚é‚©Šm”F*/
+/*ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£ç­”ã¨æ¨¡ç¯„è§£ç­”ãŒä¸€è‡´ã™ã‚‹ã‹ç¢ºèª*/
 bool checkYourAns(vector<vector<Grid>> grids) {
   for (auto y = grids.begin(); y != grids.end(); y++) {
     for (auto x = (*y).begin(); x != (*y).end(); x++) {
@@ -258,61 +258,61 @@ bool checkYourAns(vector<vector<Grid>> grids) {
 
 
 
-/*•`‰æ‚Ìƒ}[ƒJ[‚Ì‘I‘ğ*/
+/*æç”»æ™‚ã®ãƒãƒ¼ã‚«ãƒ¼ã®é¸æŠ*/
 void selectPatern(int y, int posY, int x, int posX, bool yourColor) {
-  if ((x == posX) && (y == posY)) {// ƒJ[ƒ\ƒ‹‚ÌˆÊ’u‚ğ•\¦
+  if ((x == posX) && (y == posY)) {// ã‚«ãƒ¼ã‚½ãƒ«ã®ä½ç½®ã‚’è¡¨ç¤º
     if (yourColor) {
-      cout << "š";
+      cout << "â˜…";
     } else {
-      cout << "™";
+      cout << "â˜†";
     }
-  }else { //ƒ}ƒX–Ú•`‰æ
+  }else { //ãƒã‚¹ç›®æç”»
     if (yourColor) {
-      cout << "¡"; //•‚¢ƒ}ƒX–Ú‚ğ•\¦
+      cout << "â– "; //é»’ã„ãƒã‚¹ç›®ã‚’è¡¨ç¤º
     } else {
-      cout << " "; //”’‚¢ƒ}ƒX–Ú‚ğ•\¦
+      cout << "â–¡"; //ç™½ã„ãƒã‚¹ç›®ã‚’è¡¨ç¤º
     }
   }
 }
 
 
-/*•`‰æˆ—*/
+/*æç”»å‡¦ç†*/
 void drawPic(vector<vector<Grid>>& grids, int posY, int posX, vector<vector<int>> hintLine, vector<vector<int>> hintRaw) {
   cout << endl;
   for (size_t y = 0; y < grids.size(); y++) {
-    cout << ("@");
+    cout << ("ã€€");
     for (size_t x = 0; x < grids.at(y).size(); x++) {
-      selectPatern(y, posY, x, posX, grids.at(y).at(x).yourColor); //ƒ}ƒX–Ú‚Ì–Í—l‚ğ•\¦
+      selectPatern(y, posY, x, posX, grids.at(y).at(x).yourColor); //ãƒã‚¹ç›®ã®æ¨¡æ§˜ã‚’è¡¨ç¤º
     }
-    printHintL(int(y), hintLine); //sƒqƒ“ƒg‚Ì•\¦
+    printHintL(int(y), hintLine); //è¡Œãƒ’ãƒ³ãƒˆã®è¡¨ç¤º
     cout << endl;
   }
-  printHintR(hintRaw); //ÅŒã‚É—ñƒqƒ“ƒg‚Ì•\¦
+  printHintR(hintRaw); //æœ€å¾Œã«åˆ—ãƒ’ãƒ³ãƒˆã®è¡¨ç¤º
 }
 
 
 
-/*“ü—Íˆ—*/
+/*å…¥åŠ›å‡¦ç†*/
 void input(vector<vector<Grid>>& grids, int &posY, int &posX, int hight, int width) {
-  switch (_getch()) { //ƒL[ƒ{[ƒh“ü—Í‚Ìó•t
-    case 'p': //p‚ª“ü—Í‚³‚ê‚½‚ç‚»‚Ìƒ}ƒX–Ú‚ÌF‚ğ•Ï‚¦‚é
+  switch (_getch()) { //ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›ã®å—ä»˜
+    case 'p': //pãŒå…¥åŠ›ã•ã‚ŒãŸã‚‰ãã®ãƒã‚¹ç›®ã®è‰²ã‚’å¤‰ãˆã‚‹
       grids.at(posY).at(posX).changeYourColor();
       break;
-    case 'u': //u‚ª“ü—Í‚³‚ê‚½‚çƒJ[ƒ\ƒ‹‚ğã‚ÉˆÚ“®
+    case 'u': //uãŒå…¥åŠ›ã•ã‚ŒãŸã‚‰ã‚«ãƒ¼ã‚½ãƒ«ã‚’ä¸Šã«ç§»å‹•
       posY--;
-      if (posY < 0) posY = 0; //ˆÚ“®§ŒÀ
+      if (posY < 0) posY = 0; //ç§»å‹•åˆ¶é™
       break;
-    case 'd': //d‚ª“ü—Í‚³‚ê‚½‚çƒJ[ƒ\ƒ‹‚ğ‰º‚ÉˆÚ“®
+    case 'd': //dãŒå…¥åŠ›ã•ã‚ŒãŸã‚‰ã‚«ãƒ¼ã‚½ãƒ«ã‚’ä¸‹ã«ç§»å‹•
       posY++;
-      if (hight <= posY) posY --; //ˆÚ“®§ŒÀ
+      if (hight <= posY) posY --; //ç§»å‹•åˆ¶é™
       break;
     case 'r':
-      posX++; //r‚ª“ü—Í‚³‚ê‚½‚çƒJ[ƒ\ƒ‹‚ğ‰E‚ÉˆÚ“®
-      if (width <= posX) posX --; //ˆÚ“®§ŒÀ
+      posX++; //rãŒå…¥åŠ›ã•ã‚ŒãŸã‚‰ã‚«ãƒ¼ã‚½ãƒ«ã‚’å³ã«ç§»å‹•
+      if (width <= posX) posX --; //ç§»å‹•åˆ¶é™
       break;
     case 'l':
-      posX--; //l‚ª“ü—Í‚³‚ê‚½‚çƒJ[ƒ\ƒ‹‚ğ¶‚ÉˆÚ“®
-      if (posX < 0) posX = 0; //ˆÚ“®§ŒÀ
+      posX--; //lãŒå…¥åŠ›ã•ã‚ŒãŸã‚‰ã‚«ãƒ¼ã‚½ãƒ«ã‚’å·¦ã«ç§»å‹•
+      if (posX < 0) posX = 0; //ç§»å‹•åˆ¶é™
       break;
     default :
       break;
@@ -322,33 +322,33 @@ void input(vector<vector<Grid>>& grids, int &posY, int &posX, int hight, int wid
 
 
 int main() {
-  const int hight = 4, width = 4; //ƒ}ƒX–Ú‚ÌƒTƒCƒY_•K‚¸1Œ…‚Éİ’è
-  vector<vector<Grid>> grids(hight, vector<Grid>(width)); //ƒvƒŒƒCƒ„[‚Ì‰ğ“šî•ñ‚ğŠi”[
-  vector<vector<int>> hintLine; //sƒqƒ“ƒgî•ñ
-  vector<vector<int>> hintRaw; //—ñƒqƒ“ƒgî•ñ
+  const int hight = 4, width = 4; //ãƒã‚¹ç›®ã®ã‚µã‚¤ã‚º_è¡¨ç¤ºã®éƒ½åˆä¸Šå¿…ãš1æ¡ã«è¨­å®š
+  vector<vector<Grid>> grids(hight, vector<Grid>(width)); //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£ç­”æƒ…å ±ã‚’æ ¼ç´
+  vector<vector<int>> hintLine; //è¡Œãƒ’ãƒ³ãƒˆæƒ…å ±
+  vector<vector<int>> hintRaw; //åˆ—ãƒ’ãƒ³ãƒˆæƒ…å ±
 
-  /*–â‘è¶¬ˆ—*/
-  cout << ("–â‘èì¬’†");
+  /*å•é¡Œç”Ÿæˆå‡¦ç†*/
+  cout << ("å•é¡Œä½œæˆä¸­");
   do {
-    grids.clear(); //Ä“x–â‘è¶¬‚Évector‚Ì’†g‚ğÁ‹
-    hintLine.clear(); //Ä“x–â‘è¶¬‚Évector‚Ì’†g‚ğÁ‹
-    hintRaw.clear(); //Ä“x–â‘è¶¬‚Évector‚Ì’†g‚ğÁ‹
-    grids = makeAns(hight, width); //–â‘è¶¬
+    grids.clear(); //å†åº¦å•é¡Œç”Ÿæˆæ™‚ã«vectorã®ä¸­èº«ã‚’æ¶ˆå»
+    hintLine.clear(); //å†åº¦å•é¡Œç”Ÿæˆæ™‚ã«vectorã®ä¸­èº«ã‚’æ¶ˆå»
+    hintRaw.clear(); //å†åº¦å•é¡Œç”Ÿæˆæ™‚ã«vectorã®ä¸­èº«ã‚’æ¶ˆå»
+    grids = makeAns(hight, width); //å•é¡Œç”Ÿæˆ
     hintLine = getHintLine(grids, hight, width);
     hintRaw = getHintRaw(grids, hight, width);
-  } while(!checkAnoSol(hight, width, hintLine, hintRaw)); //ì–â‚ª“K“–‚©Šm”F
+  } while(!checkAnoSol(hight, width, hintLine, hintRaw)); //ä½œå•ãŒé©å½“ã‹ç¢ºèª
   system("cls");
 
-  /*•`‰æˆ—*/
+  /*æç”»å‡¦ç†*/
   while (!checkYourAns(grids)) {
-    static int posX = 0, posY = 0; //ƒJ[ƒ\ƒ‹‚ÌÀ•W’è‹`
-    drawPic(grids, posY, posX, hintLine, hintRaw); //•`‰æˆ—
+    static int posX = 0, posY = 0; //ã‚«ãƒ¼ã‚½ãƒ«ã®åº§æ¨™å®šç¾©
+    drawPic(grids, posY, posX, hintLine, hintRaw); //æç”»å‡¦ç†
     cout << endl << endl;
-    input(grids, posY, posX, hight, width); //“ü—Íˆ—
-    system("cls"); //‰æ–ÊÁ‹
+    input(grids, posY, posX, hight, width); //å…¥åŠ›å‡¦ç†
+    system("cls"); //ç”»é¢æ¶ˆå»
   }
   drawPic(grids, -1, -1, hintLine, hintRaw);
-  cout << "³‰ğ!ƒNƒŠƒA!" << endl;
+  cout << "æ­£è§£!ã‚¯ãƒªã‚¢!" << endl;
 
 
 }
